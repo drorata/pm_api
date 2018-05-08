@@ -1,0 +1,5 @@
+.ipynb_checkpoints/
+data/
+pipeline.pkl
+src/master/
+src/__pycache__/

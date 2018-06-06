@@ -30,11 +30,30 @@ To make life easy, simply run `make train`.
 
 ## Run the app
 
+### Local and naive
+
 First, from the root of the project run `python src/app.py`.
 You are expecting the following: `* Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)`.
 If you install `httpie`, you could now easily try out the app.
 In another terminal, you can now ask the app for predictions on the test set: `http POST http://0.0.0.0:5000/predict < data/test.json`.
 That's it.
+
+### Using docker
+
+You can also use the provided `Dockerfile`. First, build the image:
+
+```bash
+docker build -t pm_api .
+```
+
+Once built, you can start a container running the image.
+It is important to forward the port `5000` from the container to the host; use the `-p` parameter to do so:
+
+```bash
+docker run -p 5000:5000 pm_api
+```
+
+Once, running, you can send requests using the same line as above (used for the local example).
 
 # Remarks
 

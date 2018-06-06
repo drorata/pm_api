@@ -2,7 +2,18 @@ from flask import Flask, jsonify, request
 from sklearn.externals import joblib
 import pandas as pd
 import train_model as tm
+import logging
+
 app = Flask(__name__)
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+ch = logging.StreamHandler()
+ch.setLevel(logging.INFO)
+formatter = logging.Formatter(
+    '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+ch.setFormatter(formatter)
+logger.addHandler(ch)
 
 
 @app.route('/predict', methods=['POST'])
@@ -18,6 +29,7 @@ def predict():
         The field `predictions` will hold a list of 0 and 1's corresponding
         to the predictions.
     """
+    logger.info('Starting prediction')
     json_ = request.get_json()
 
     query_df = pd.DataFrame(json_)
@@ -27,6 +39,7 @@ def predict():
     prediction = clf.predict(query)
     prediction = [int(x) for x in prediction]
 
+    logger.info("Prediction is ready")
     return jsonify({'prediction': prediction})
 
 

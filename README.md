@@ -60,3 +60,4 @@ Once, running, you can send requests using the same line as above (used for the 
 - I used the skeleton provided by [Amir Ziai](https://medium.com/@amirziai/a-flask-api-for-serving-scikit-learn-models-c8bcdaa41daa)
 - To have a consistent way of training and predicting, I use the tools from [ds-pub-utils](https://github.com/drorata/ds-pub-utils).
   This allows fitting the model on the training set (including with regards to the data preprocessing).
+- You can also play around with the `/sleep` endpoint and use `foo.json` and `foo2.json` to see how two requests are processed in parallel.

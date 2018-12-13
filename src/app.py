@@ -3,6 +3,7 @@ from sklearn.externals import joblib
 import pandas as pd
 import train_model as tm
 import logging
+import time
 
 app = Flask(__name__)
 
@@ -64,6 +65,16 @@ def minimal_test():
     y = json_['y']
     prediction = int(x) + int(y)
     return jsonify({'prediction': prediction})
+
+
+@app.route('/sleep', methods=['POST'])
+def my_sleep():
+    json_ = request.get_json()
+    n = json_['n']
+    logger.info(f"Started SLEEP with '{n}' seconds")
+    time.sleep(n)
+    logger.info(f"Finished SLEEP with '{n}' seconds")
+    return jsonify({'Success': "YAY"})
 
 
 if __name__ == '__main__':
